@@ -1,2 +1,2 @@
 # Midterm
-this is the submission of Joe
+this is the submission of Joe Ayoub
