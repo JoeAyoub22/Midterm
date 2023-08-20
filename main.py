@@ -53,10 +53,51 @@ def add_employee(employees):
 def display_employees(employees):
 #Reference:
 #https://www.tutorialspoint.com/How-to-sort-a-Python-date-string-list
-#https://stackoverflow.com/questions/29510219/python-list-splitting-sorting-by-date-then-joining
-    sorted_employees = sorted(employees, key=lambda x: x.start_date, reverse=True)
+#https://blogboard.io/blog/knowledge/python-sorted-lambda/
+    sorted_employees = sorted(employees, key=lambda employee: employee.start_date, reverse=True)
     for employee in sorted_employees:
       print("employee_id: ", employee.employee_id, "username: ", employee.username, "start date: ", employee.start_date, "gender: ", employee.gender, "salary: ", employee.salary)
+
+def change_salary(employees):
+  emp_id = input("Enter the id of the employee: ")
+  new_salary = int(input("Enter desired salary: "))
+  for employee in employees:
+    if employee.employee_id == int(emp_id):
+      employee.salary = new_salary
+      print("New salary inserted")
+      return
+  print("not an employee")
+
+def remove_employee(employees):
+  emp_id = input("Enter the id of the employee: ")
+  for employee in employees:
+    if employee.employee_id == int(emp_id):
+      employees.remove(employee)
+      print("employee removed from database")
+      return
+  print("employee not in database")
+
+def raise_emp_salary(employees):
+  emp_id = input("Enter the id of the employee: ")
+  raise_percentage = float(input("Enter raise percentage: "))
+  for employee in employees:
+    if employee.employee_id == int(emp_id):
+      employee.salary = int(employee.salary * raise_percentage)
+      print("salary raise done")
+      return
+  print("employee not in database")
+      
+def save_changes(filename, employees):
+#Reference:
+#https://www.pythontutorial.net/python-basics/python-write-text-file/
+#https://www.geeksforgeeks.org/python-string-concatenation/
+    with open(filename, 'w') as f:
+        for employee in employees:
+          new_employee = "{} {} {} {} {}".format(employee.employee_id, employee.username, employee.start_date, employee.gender, employee.salary)
+          f.write(new_employee + '\n')
+          print("changes saved")
+  
+  
 
 print("Welcome user")
 employees = import_employees("employees.txt")
@@ -98,6 +139,15 @@ while Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
         add_employee(employees)
       elif choice == 3:
         display_employees(employees)
+      elif choice == 4:
+        change_salary(employees)
+      elif choice == 5:
+        remove_employee(employees)
+      elif choice == 6:
+        raise_emp_salary(employees)
+      elif choice == 7:
+        save_changes('employees.txt', employees)
+        break
   menu()
 
 
