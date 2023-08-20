@@ -97,19 +97,21 @@ def save_changes(filename, employees):
           f.write(new_employee + '\n')
           print("changes saved")
   
-  
+def check_salary(employees):
+  print("Your salary is", employee.salary)
 
 print("Welcome user")
 employees = import_employees("employees.txt")
 login_attempts = 0
-admin_correct_username = "admin"
-admin_correct_password = "admin123123"
+
+Userinputed_username = ""
+Userinputed_passowrd = ""
 
 while login_attempts<5:
   Userinputed_username = input("Enter your username ")
   Userinputed_passowrd = input("Enter your password ")
 
-  if Userinputed_username == admin_correct_username and Userinputed_passowrd == admin_correct_password:
+  if Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
     print("welcome admin")
     break
   else:
@@ -119,8 +121,8 @@ while login_attempts<5:
 if login_attempts >=5:
   print("Maximum attemps reached you are now locked")
 
-while Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
-  def menu():
+if Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
+  def admin_menu():
     choice=None
     while choice!=7:
       print("Admin Menu:")
@@ -131,7 +133,7 @@ while Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
       print("5. Remove Employee")
       print("6. Raise Employee's Salary")
       print("7. Exit")
-      choice=int(input())
+      choice=int(input("what would you like to do? "))
 
       if choice == 1:
         display_stats(employees)
@@ -148,9 +150,32 @@ while Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
       elif choice == 7:
         save_changes('employees.txt', employees)
         break
-  menu()
+      else:
+        print("not an option select another")
+  admin_menu()
 
-
+else:
+  for employee in employees:
+    if Userinputed_username == employee.username:
+      if employee.gender == "male":
+        print("Hi Mr.", employee.username)
+      else:
+        print("Hi Ms.", employee.username)
+  
+  def employee_menu():
+    choice=None
+    while choice!=2:
+      print("employee menu: ")
+      print("1. Check my salary")
+      print("2. exit")
+      choice=int(input("what would you like to do? "))
+      if choice == 1:
+        check_salary(employees)
+      elif choice ==2:
+        break
+      else:
+        print("not an option select another")
+  employee_menu()       
 
 
   
