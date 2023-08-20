@@ -1,12 +1,13 @@
+import itertools
+from datetime import datetime
 class Employee:
+  id_obj = itertools.count(1)
   def __init__(self,employee_id,username,start_date,gender,salary):
-    self.employee_id = employee_id
+    self.employee_id = next(Employee.id_obj)
     self.username = username
     self.start_date = start_date
     self.gender = gender
     self.salary = salary
-
-
 
 def import_employees(filename):
 #references:
@@ -20,6 +21,7 @@ def import_employees(filename):
     return employees
 
 def display_stats(employees):
+  num_employees = len(employees)
   male_count = 0
   female_count = 0
   for employee in employees:
@@ -28,8 +30,24 @@ def display_stats(employees):
       male_count +=1
     else:
       female_count +=1
+  male_percentage = (male_count / num_employees) * 100
+  female_percentage = (female_count / num_employees) * 100
   print("The number of male employees is: " , male_count)
-  print("The number of female employees is: " , female_count)
+  print("Percentage of male employees is :" , male_percentage, "%")
+  print("The number of female employees is: " , female_count) 
+  print("Percentage of female employees is :" , female_percentage, "%")
+
+def add_employee(employees):
+#References:
+#https://bobbyhadz.com/blog/python-create-incremental-id-in-class
+#https://www.geeksforgeeks.org/get-current-date-using-python/
+#https://www.programiz.com/python-programming/datetime/current-datetime#:~:text=If%20we%20need%20to%20get,class%20of%20the%20datetime%20module.&text=Here%2C%20we%20have%20used%20datetime,and%20time%20in%20another%20format.
+  employee_id = next(Employee.id_obj)
+  username = input("Enter employee's username: ")
+  gender = input("Enter employee's gender: ")
+  salary = int(input("Enter employees's salary: "))
+  join_date = datetime.now().strftime("%y/%m/%d")
+  employees.append(Employee(employee_id, username, join_date, gender, salary))
 
 print("Welcome user")
 employees = import_employees("employees.txt")
@@ -67,6 +85,8 @@ while Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
 
       if choice == 1:
         display_stats(employees)
+      elif choice == 2:
+        add_employee(employees)
   menu()
 
 
