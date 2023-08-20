@@ -46,8 +46,17 @@ def add_employee(employees):
   username = input("Enter employee's username: ")
   gender = input("Enter employee's gender: ")
   salary = int(input("Enter employees's salary: "))
-  join_date = datetime.now().strftime("%y/%m/%d")
-  employees.append(Employee(employee_id, username, join_date, gender, salary))
+  start_date = datetime.now().strftime("%y/%m/%d")
+  employees.append(Employee(employee_id, username, start_date, gender, salary))
+  print("Employee has been added")
+
+def display_employees(employees):
+#Reference:
+#https://www.tutorialspoint.com/How-to-sort-a-Python-date-string-list
+#https://stackoverflow.com/questions/29510219/python-list-splitting-sorting-by-date-then-joining
+    sorted_employees = sorted(employees, key=lambda x: x.start_date, reverse=True)
+    for employee in sorted_employees:
+      print("employee_id: ", employee.employee_id, "username: ", employee.username, "start date: ", employee.start_date, "gender: ", employee.gender, "salary: ", employee.salary)
 
 print("Welcome user")
 employees = import_employees("employees.txt")
@@ -87,6 +96,8 @@ while Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
         display_stats(employees)
       elif choice == 2:
         add_employee(employees)
+      elif choice == 3:
+        display_employees(employees)
   menu()
 
 
