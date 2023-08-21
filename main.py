@@ -150,7 +150,6 @@ if username == "admin" and password == "admin123123":
       else:
         print("not an option select another")
   admin_menu()
-
 else:
   for employee in employees:
     if username == employee.username and password =="":
@@ -173,6 +172,11 @@ else:
       else:
         print("not an option select another")
   employee_menu()     
+      
+
+# I give up I can't access the employee menu
+
+  
 
 
 
