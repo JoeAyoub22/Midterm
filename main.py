@@ -103,15 +103,12 @@ def check_salary(employees):
 print("Welcome user")
 employees = import_employees("employees.txt")
 login_attempts = 0
+max_attempts =5
+while login_attempts < max_attempts:
+  username = input("Enter your username ")
+  password = input("Enter your password ")
 
-Userinputed_username = ""
-Userinputed_passowrd = ""
-
-while login_attempts<5:
-  Userinputed_username = input("Enter your username ")
-  Userinputed_passowrd = input("Enter your password ")
-
-  if Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
+  if username == "admin" and password == "admin123123":
     print("welcome admin")
     break
   else:
@@ -121,7 +118,7 @@ while login_attempts<5:
 if login_attempts >=5:
   print("Maximum attemps reached you are now locked")
 
-if Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
+if username == "admin" and password == "admin123123":
   def admin_menu():
     choice=None
     while choice!=7:
@@ -156,7 +153,7 @@ if Userinputed_username == "admin" and Userinputed_passowrd == "admin123123":
 
 else:
   for employee in employees:
-    if Userinputed_username == employee.username:
+    if username == employee.username and password =="":
       if employee.gender == "male":
         print("Hi Mr.", employee.username)
       else:
@@ -175,11 +172,9 @@ else:
         break
       else:
         print("not an option select another")
-  employee_menu()       
+  employee_menu()     
 
 
-  
-  
 
     
 
